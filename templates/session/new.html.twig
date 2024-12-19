@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planifier une Nouvelle Session{% endblock %}
+
+{% block body %}
+    <h1>Planifier une Nouvelle Session</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.heureDebut) }}
+        {{ form_row(form.heureFin) }}
+        {{ form_row(form.salle) }}
+        {{ form_row(form.cours) }}
+        <button type="submit">Planifier</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_session_index') }}">Retour à la liste des sessions</a>
+{% endblock %}

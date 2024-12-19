@@ -1,0 +1,42 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Cours{% endblock %}
+
+{% block body %}
+    <h1>Liste des Cours</h1>
+
+    <a href="{{ path('app_cours_new') }}">Créer un nouveau cours</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Module</th>
+                <th>Professeur</th>
+                <th>Classes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cours in cours %}
+                <tr>
+                    <td>{{ cours.module }}</td>
+                    <td>{{ cours.professeur.nom }}</td>
+                    <td>
+                        {% for classe in cours.classes %}
+                            {{ classe.nom }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_cours_edit', {'id': cours.id}) }}">Modifier</a>
+                        <a href="{{ path('app_cours_delete', {'id': cours.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun cours trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Sessions{% endblock %}
+
+{% block body %}
+    <h1>Liste des Sessions</h1>
+
+    <a href="{{ path('app_session_new') }}">Planifier une nouvelle session</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Heure de début</th>
+                <th>Heure de fin</th>
+                <th>Salle</th>
+                <th>Cours</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for session in sessions %}
+                <tr>
+                    <td>{{ session.date|date('d/m/Y') }}</td>
+                    <td>{{ session.heureDebut|date('H:i') }}</td>
+                    <td>{{ session.heureFin|date('H:i') }}</td>
+                    <td>{{ session.salle }}</td>
+                    <td>{{ session.cours.module }}</td>
+                    <td>
+                        <a href="{{ path('app_session_edit', {'id': session.id}) }}">Modifier</a>
+                        <a href="{{ path('app_session_delete', {'id': session.id}) }}">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucune session trouvée.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
